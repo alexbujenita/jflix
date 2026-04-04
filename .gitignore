@@ -56,3 +56,5 @@ __MACOSX/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+postgres_data
