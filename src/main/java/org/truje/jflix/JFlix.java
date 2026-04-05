@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JflixApplication {
+public class JFlix {
 
     public static void main(String[] args) {
-        SpringApplication.run(JflixApplication.class, args);
+        SpringApplication.run(JFlix.class, args);
     }
 }
