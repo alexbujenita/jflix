@@ -1,4 +1,4 @@
-package org.truje.jflix.model.request.auth;
+package org.truje.jflix.model.auth.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

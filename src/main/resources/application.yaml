@@ -8,6 +8,12 @@ spring:
     name: jflix
 
   datasource:
-      url: ${DB_URL:jdbc:postgresql://localhost:5432/postgres}
-      username: ${DB_USER:postgres}
-      password: ${DB_PASSWORD:t00r}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:t00r}
+
+jwt:
+  issuer: jflix
+  access-token-expiration: PT10M
+  public-key-location: ${JWT_PUBLIC_KEY_LOCATION:classpath:keys/jwt-public.pem}
+  private-key-location: ${JWT_PRIVATE_KEY_LOCATION:classpath:keys/jwt-private.pem}

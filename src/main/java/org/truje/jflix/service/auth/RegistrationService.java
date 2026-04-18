@@ -1,9 +1,9 @@
-package org.truje.jflix.service;
+package org.truje.jflix.service.auth;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.truje.jflix.UserAccountRepository;
-import org.truje.jflix.model.request.auth.RegisterRequest;
+import org.truje.jflix.model.auth.request.RegisterRequest;
+import org.truje.jflix.repository.UserAccountRepository;
 import org.truje.jflix.repository.entity.UserAccountEntity;
 
 @Service
