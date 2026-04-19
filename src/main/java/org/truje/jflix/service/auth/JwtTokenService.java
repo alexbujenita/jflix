@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -50,9 +49,7 @@ public class JwtTokenService {
                 .claim("roles", roles)
                 .build();
 
-        String tokenValue = jwtEncoder
-                .encode(JwtEncoderParameters.from(claims))
-                .getTokenValue();
+        String tokenValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
         return new LoginResponse(tokenValue, "Bearer", accessTokenExpiration.toSeconds());
     }

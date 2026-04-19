@@ -14,6 +14,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.truje.jflix.service.auth.DatabaseUserDetailsService;
 
 @Configuration
@@ -33,7 +35,28 @@ public class SecurityConfig {
     }
 
     @Bean
+    public SecurityContextRepository securityContextRepository() {
+        return new HttpSessionSecurityContextRepository();
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) {
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, AUTH_URLS)
+                        .permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/auth/logout")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/test/**")
+                        .permitAll() // for now just to random stuff
+                        .anyRequest()
+                        .authenticated());
+
+        return http.build();
+    }
+
+    // USE ONE OR THE OTHER, this works with JWT auth
+    // @Bean
+    public SecurityFilterChain securityFilterChainStateless(HttpSecurity http) {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, AUTH_URLS)

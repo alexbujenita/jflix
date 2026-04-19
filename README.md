@@ -1,8 +1,8 @@
 # jFlix
 
+## Run the application locally with cookie auth:
 
-
-## Run the application locally:
+## Run the application locally with stateless auth:
 
 1. Make sure you have Docker installed and running on your machine.
 2. Run `docker-compose up` in the root directory of the project.

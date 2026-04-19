@@ -19,17 +19,21 @@ public class LoginService {
         this.jwtTokenService = jwtTokenService;
     }
 
-    public LoginResponse login(LoginRequest loginRequest) {
+    public LoginResponse loginStateless(LoginRequest loginRequest) {
         String normalizedEmail = UtilClass.normalizeEmail(loginRequest.email());
 
         Authentication authentication = authenticationManager.authenticate(
-                UsernamePasswordAuthenticationToken.unauthenticated(
-                        normalizedEmail,
-                        loginRequest.password())
-        );
+                UsernamePasswordAuthenticationToken.unauthenticated(normalizedEmail, loginRequest.password()));
 
         AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
 
         return jwtTokenService.createAccessToken(authenticatedUser);
+    }
+
+    public Authentication authenticate(LoginRequest loginRequest) {
+        String normalizedEmail = UtilClass.normalizeEmail(loginRequest.email());
+
+        return authenticationManager.authenticate(
+                UsernamePasswordAuthenticationToken.unauthenticated(normalizedEmail, loginRequest.password()));
     }
 }

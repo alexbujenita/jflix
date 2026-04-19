@@ -12,8 +12,23 @@ spring:
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:t00r}
 
+  jpa:
+    open-in-view: false
+
+# the jwt section is only used when the auth flow is STATELESS
 jwt:
   issuer: jflix
-  access-token-expiration: PT10M
+  access-token-expiration: P1D
   public-key-location: ${JWT_PUBLIC_KEY_LOCATION:classpath:keys/jwt-public.pem}
   private-key-location: ${JWT_PRIVATE_KEY_LOCATION:classpath:keys/jwt-private.pem}
+
+
+server:
+  servlet:
+    session:
+      timeout: 120m
+      cookie:
+        name: JFLIXSESSION
+        http-only: true
+        secure: true
+        same-site: lax
