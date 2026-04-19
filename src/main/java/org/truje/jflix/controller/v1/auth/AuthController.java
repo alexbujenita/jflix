@@ -54,6 +54,10 @@ public class AuthController {
 
         Authentication authentication = loginService.authenticate(loginRequest);
 
+        // Rotate the session id after authentication to reduce fixation risk.
+        request.getSession(true);
+        request.changeSessionId();
+
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
