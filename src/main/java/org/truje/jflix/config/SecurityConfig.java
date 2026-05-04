@@ -46,8 +46,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/auth/logout")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/test/**")
-                        .permitAll() // for now just to random stuff
+                        .requestMatchers(HttpMethod.GET, "/public/**")
+                        .permitAll()
                         .anyRequest()
                         .authenticated());
 

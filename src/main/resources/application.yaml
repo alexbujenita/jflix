@@ -32,3 +32,7 @@ server:
         http-only: true
         secure: true
         same-site: lax
+
+tmdb:
+    api-key: ${TMDB_API_TOKEN}
+    base-url: https://api.themoviedb.org/3
